@@ -4,6 +4,7 @@ from flask import Flask
 from models import storage
 from api.v1.views import app_views
 from os import getenv
+from flask import jsonify
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
@@ -16,9 +17,9 @@ def teardown(error):
 
 
 @app.errorhandler(404)
-def handle_execption(e):
+def handle_exception(e):
     '''handles 404 error'''
-    return {"error": "Not found"}
+    return jsonify({"error": "Not found"}), 404
 
 
 if __name__ == "__main__":
